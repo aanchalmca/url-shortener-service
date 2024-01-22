@@ -19,3 +19,14 @@ Example for body:
 
 GET - Open a browser with shortlink provided. It will redirect to the original link 
 
+Run following commands to set Mongodb Database from Mongo shell
+use url_shortener
+
+db.createUser( { user: "url_shortener", pwd: "secret", roles: [ "readWrite", "dbAdmin" ]} )
+
+db.createCollection("counters")
+
+db.createCollection("links")
+
+db.counters.insert({_id: "SHORT_URL_UNIQUE_ID", seq: 1000000000});
+
