@@ -8,7 +8,6 @@ import lombok.Value;
 import java.io.Serializable;
 import java.time.ZonedDateTime;
 
-
 @Value
 @Builder(builderClassName = "Builder")
 @JsonDeserialize(builder = ShortenURLResponse.Builder.class)

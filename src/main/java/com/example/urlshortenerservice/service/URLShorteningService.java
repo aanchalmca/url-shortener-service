@@ -14,12 +14,8 @@ import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.data.mongodb.core.query.Update;
 import org.springframework.stereotype.Service;
-
-import java.time.OffsetDateTime;
-import java.time.ZoneId;
 import java.time.ZoneOffset;
 import java.time.ZonedDateTime;
-import java.util.Objects;
 import java.util.Optional;
 
 @Service
@@ -37,7 +33,6 @@ public class URLShorteningService {
         this.mongoOperations = mongoOperations;
     }
 
-//    TODO: @Retryable
     public ShortenURLResponse shortenUrl (ShortenURLRequest shortenURLRequest) {
         if (!validateIncomingLongURL(shortenURLRequest.getLongUrl())){
             throw new InvalidLongUrlException();
@@ -67,15 +62,8 @@ public class URLShorteningService {
         return counter.getSeq();
     }
 
-    /*public List<URLShorteningEntity> getAllURLs(){
-        return linkRepository.getAllURLs();
-    }*/
-
     public String getLongURL(String shortUrl){
-//        if (shortUrl.split("\\/").length != 2)
-//            return "Invalid short url";
 
-//        String encodedString = shortUrl.split("\\/")[1];
         Long id = Base62Encoder.decode(shortUrl);
         Optional<Link> link = linkRepository.findById(id);
 
