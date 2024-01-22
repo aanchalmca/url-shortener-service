@@ -74,7 +74,7 @@ class UrlShortenerServiceApplicationTests {
 	}
 
 	@Test
-	void givenUserExists_whenFindByUsername_thenGetUser() throws Exception {
+	void givenLongURL_thenGetShortURLInResponse() throws Exception {
 		MappingMongoConverter conv = (MappingMongoConverter) mongoTemplate.getConverter();
 		// tell mongodb to use the custom converters
 		conv.setCustomConversions(customConversions());
