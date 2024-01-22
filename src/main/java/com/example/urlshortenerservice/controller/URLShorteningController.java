@@ -1,0 +1,46 @@
+package com.example.urlshortenerservice.controller;
+
+import com.example.urlshortenerservice.dto.ShortenURLRequest;
+import com.example.urlshortenerservice.dto.ShortenURLResponse;
+import com.example.urlshortenerservice.service.InvalidLongUrlException;
+import com.example.urlshortenerservice.service.URLShorteningService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+@Slf4j
+@RestController
+@RequestMapping(value="/shortenUrl")
+@Tag(name="${usu.apis.tag}")
+public class URLShorteningController
+{
+    private final URLShorteningService urlShorteningService;
+
+    @Autowired
+    public URLShorteningController(URLShorteningService urlShorteningService){
+        this.urlShorteningService = urlShorteningService;
+    }
+
+    /**
+     * Create the short url for the corresponding longurl provided as input
+     * @param shortenURLRequest
+     * @return
+     */
+   @PostMapping(value="/create")
+   @Operation(summary = "${usu.create.shortenurl}")
+    public ResponseEntity<ShortenURLResponse> shortenURL(@RequestBody ShortenURLRequest shortenURLRequest){
+       return new ResponseEntity<>(urlShorteningService.shortenUrl(shortenURLRequest),
+               HttpStatus.OK);
+    }
+
+    @ResponseStatus(value=HttpStatus.BAD_REQUEST, reason="Input Long URL is incorrect")
+    @ExceptionHandler(InvalidLongUrlException.class)
+    public void invalidLongUrl() {
+        log.error("Invalid long URL");
+    }
+
+}
