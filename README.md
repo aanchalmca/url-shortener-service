@@ -9,8 +9,9 @@ To create the short urls for long urls
 * Swagger - http://localhost:8080/swagger-ui/index.html
 * Test containers for integration test
 
-Two APIs
-POST - To create a short url for the long url provided in the request
+**Two APIs**
+
+* POST - To create a short url for the long url provided in the request
 http://localhost:8080/shortenUrl/create
 
 Example for body:
@@ -18,7 +19,7 @@ Example for body:
 "longUrl": "https://www.bbc.co.uk/weather/sl1"
 }
 
-GET - Open a browser with shortlink provided. It will redirect to the original link 
+* GET - Open a browser with shortlink provided. It will redirect to the original link 
 
 Run following commands to set Mongodb Database from Mongo shell
 
