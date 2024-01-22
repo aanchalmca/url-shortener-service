@@ -9,24 +9,27 @@ To create the short urls for long urls
 * Swagger - http://localhost:8080/swagger-ui/index.html
 * Test containers for integration test
 
-Two APIs
-POST - To create a short url for the long url provided in the request
+**Two APIs**
+
+* POST - To create a short url for the long url provided in the request
 http://localhost:8080/shortenUrl/create
+
 Example for body:
 {
 "longUrl": "https://www.bbc.co.uk/weather/sl1"
 }
 
-GET - Open a browser with shortlink provided. It will redirect to the original link 
+* GET - Open a browser with shortlink provided. It will redirect to the original link 
 
 Run following commands to set Mongodb Database from Mongo shell
-use url_shortener
 
-db.createUser( { user: "url_shortener", pwd: "secret", roles: [ "readWrite", "dbAdmin" ]} )
+_use url_shortener_
 
-db.createCollection("counters")
+_db.createUser( { user: "url_shortener", pwd: "secret", roles: [ "readWrite", "dbAdmin" ]} )_
 
-db.createCollection("links")
+_db.createCollection("counters")_
 
-db.counters.insert({_id: "SHORT_URL_UNIQUE_ID", seq: 1000000000});
+_db.createCollection("links")_
+
+*db.counters.insert({_id: "SHORT_URL_UNIQUE_ID", seq: 1000000000});*
 
