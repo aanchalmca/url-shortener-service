@@ -8,7 +8,7 @@ import org.springframework.context.annotation.PropertySource;
 
 @ConditionalOnExpression("'${swagger.enabled:false}' == 'true'")
 @Configuration
-@PropertySource("classpath*:usu-swagger.properties")
+@PropertySource("classpath:usu-swagger.properties")
 @OpenAPIDefinition(info = @Info(title = "${usu.api.title}",
 description = "${usu.api.description}"))
 public class SwaggerConfig {

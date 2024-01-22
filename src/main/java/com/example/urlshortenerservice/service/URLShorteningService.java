@@ -55,6 +55,7 @@ public class URLShorteningService {
         return shortenURLResponse;
     }
 
+    //Fetch next sequence for ID
     public long generateSequence(String seqName) {
         DatabaseSequence counter = mongoOperations.findAndModify(Query.query(Criteria.where("_id").is(seqName)),
                 new Update().inc("seq",1), FindAndModifyOptions.options().returnNew(true).upsert(true),
@@ -62,6 +63,7 @@ public class URLShorteningService {
         return counter.getSeq();
     }
 
+    //Fetch long url
     public String getLongURL(String shortUrl){
 
         Long id = Base62Encoder.decode(shortUrl);

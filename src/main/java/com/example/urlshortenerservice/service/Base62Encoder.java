@@ -5,6 +5,7 @@ public class Base62Encoder {
     private final static String BASE_62_CHARACTERS = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
     private final static int BASE_62 = 62;
 
+    // To encode the sequence to base 62
     static String encode(long number) {
         StringBuilder stringBuilder = new StringBuilder(1);
         do {
@@ -17,6 +18,7 @@ public class Base62Encoder {
         return stringBuilder.toString();
     }
 
+    // To decode it back
     static long decode(String number) {
         long result = 0L;
         int length = number.length();
