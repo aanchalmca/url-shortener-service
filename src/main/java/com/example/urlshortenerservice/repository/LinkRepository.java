@@ -7,4 +7,6 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface LinkRepository extends MongoRepository<Link, Long> {
 
+    Link  findByLongUrl(String longUrl);
+
 }

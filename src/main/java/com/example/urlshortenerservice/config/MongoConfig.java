@@ -5,7 +5,6 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
-import org.springframework.context.annotation.Conditional;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.data.mongodb.config.AbstractMongoClientConfiguration;
@@ -14,6 +13,7 @@ import org.springframework.data.mongodb.repository.config.EnableMongoRepositorie
 
 
 @Configuration
+
 @ConditionalOnProperty(value="enable.mongodb.real", havingValue = "true")
 @EnableMongoRepositories(basePackages = { "com.example.urlshortenerservice" })
 public class MongoConfig extends AbstractMongoClientConfiguration {

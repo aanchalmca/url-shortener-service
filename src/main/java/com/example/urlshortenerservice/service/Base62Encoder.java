@@ -1,12 +1,20 @@
 package com.example.urlshortenerservice.service;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
+@Component
 public class Base62Encoder {
 
     private final static String BASE_62_CHARACTERS = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
     private final static int BASE_62 = 62;
+    public Base62Encoder(){
+
+    }
 
     // To encode the sequence to base 62
-    static String encode(long number) {
+    public String encode(long number) {
+
         StringBuilder stringBuilder = new StringBuilder(1);
         do {
             stringBuilder.insert(0, BASE_62_CHARACTERS.charAt((int) (number % BASE_62)));
@@ -19,7 +27,7 @@ public class Base62Encoder {
     }
 
     // To decode it back
-    static long decode(String number) {
+    public long decode(String number) {
         long result = 0L;
         int length = number.length();
         for (int i = 0; i < length; i++) {
