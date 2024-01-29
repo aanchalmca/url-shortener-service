@@ -2,20 +2,15 @@ package com.example.urlshortenerservice.service;
 
 import com.example.urlshortenerservice.dto.ShortenURLRequest;
 import com.example.urlshortenerservice.dto.ShortenURLResponse;
-import com.example.urlshortenerservice.model.DatabaseSequence;
 import com.example.urlshortenerservice.model.Link;
 import com.example.urlshortenerservice.repository.CounterRepository;
 import com.example.urlshortenerservice.repository.LinkRepository;
 import org.apache.commons.validator.routines.UrlValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.data.mongodb.core.FindAndModifyOptions;
-import org.springframework.data.mongodb.core.MongoOperations;
-import org.springframework.data.mongodb.core.query.Criteria;
-import org.springframework.data.mongodb.core.query.Query;
-import org.springframework.data.mongodb.core.query.Update;
 import org.springframework.retry.annotation.Retryable;
 import org.springframework.stereotype.Service;
+
 import java.time.ZoneOffset;
 import java.time.ZonedDateTime;
 import java.util.List;

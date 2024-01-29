@@ -8,7 +8,6 @@ import com.example.urlshortenerservice.service.InvalidLongUrlException;
 import com.example.urlshortenerservice.service.URLShorteningService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
-
 import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;

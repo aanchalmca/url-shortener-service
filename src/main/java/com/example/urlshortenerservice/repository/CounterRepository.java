@@ -1,7 +1,6 @@
 package com.example.urlshortenerservice.repository;
 
 import com.example.urlshortenerservice.model.DatabaseSequence;
-import com.example.urlshortenerservice.service.Base62Encoder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.FindAndModifyOptions;
 import org.springframework.data.mongodb.core.MongoOperations;

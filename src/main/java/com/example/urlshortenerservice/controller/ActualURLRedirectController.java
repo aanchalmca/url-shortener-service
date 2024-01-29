@@ -18,7 +18,6 @@ public class ActualURLRedirectController {
         this.urlShorteningService = urlShorteningService;
     }
 
-
     @GetMapping(value="/{shortUrl}")
     @Operation(summary = "${usu.getlongurl}")
     public RedirectView redirectWithUsingRedirectView(@PathVariable("shortUrl") String shortUrl) {
