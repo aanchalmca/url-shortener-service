@@ -7,9 +7,6 @@ public class Base62Encoder {
 
     private final static String BASE_62_CHARACTERS = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
     private final static int BASE_62 = 62;
-    public Base62Encoder(){
-
-    }
 
     // To encode the sequence to base 62
     public String encode(long number) {

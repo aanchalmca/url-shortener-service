@@ -10,9 +10,7 @@ import org.springframework.web.servlet.view.RedirectView;
 
 @RestController
 public class ActualURLRedirectController {
-
     private final URLShorteningService urlShorteningService;
-
     @Autowired
     public ActualURLRedirectController(URLShorteningService urlShorteningService){
         this.urlShorteningService = urlShorteningService;

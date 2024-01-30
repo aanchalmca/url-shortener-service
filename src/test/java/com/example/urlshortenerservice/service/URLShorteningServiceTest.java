@@ -9,33 +9,26 @@ import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
-
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Optional;
-
 import static org.junit.Assert.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.*;
+
 @RunWith(MockitoJUnitRunner.class)
 public class URLShorteningServiceTest {
 
     @InjectMocks
     URLShorteningService urlShorteningService;
-
     @Mock
     LinkRepository linkRepository;
-
     @Mock
     Base62Encoder base62Encoder;
-
     @Mock
     CounterRepository counterRepository;
 
     @Test
-    public void WhenFetchLonhUrl_RetrunLongUrl(){
-
+    public void WhenFetchLongUrl_ReturnLongUrl() {
         when(base62Encoder.decode("015ftgG")).thenReturn(1000000000L);
         when(linkRepository.findById(1000000000L)).thenReturn(Optional.of(getLink()));
         assertEquals("https://www.baeldung.com/java-merge-sort", urlShorteningService.getLongURL("015ftgG"));
@@ -44,14 +37,7 @@ public class URLShorteningServiceTest {
     }
 
     @Test
-    public void WhenQueryAllUrls_ThenReturnAllUrls(){
-        when(linkRepository.findAll()).thenReturn(getAllLinks());
-        urlShorteningService.getAllUrls();
-        verify(linkRepository,times(1)).findAll();
-    }
-
-    @Test
-    public void WhenInvlidLongURLIsSet_ThenThrowException(){
+    public void WhenInvalidLongURLIsSet_ThenThrowException() {
         InvalidLongUrlException thrown = assertThrows(InvalidLongUrlException.class, () -> {
             urlShorteningService.validateIncomingLongURL("mmmm");
         });
@@ -59,14 +45,14 @@ public class URLShorteningServiceTest {
     }
 
     @Test
-    public void WhenvlidLongURLIsSet_ThenDoNotThrowException(){
+    public void WhenValidLongURLIsSet_ThenDoNotThrowException() {
         assertDoesNotThrow(() -> {
             urlShorteningService.validateIncomingLongURL("https://www.baeldung.com/java-merge-sort");
         });
     }
 
     @Test
-    public void WhenValidLongURLIsSet_ThenCreateShortrl(){
+    public void WhenValidLongURLIsSet_ThenCreateShortUrl() {
         when(linkRepository.findByLongUrl("https://www.baeldung.com/java-merge-sort")).thenReturn(null);
         when(linkRepository.insert(any(Link.class))).thenReturn(getLink());
         when(counterRepository.generateSequence(Link.SEQUENCE_NAME)).thenReturn(1000000000L);
@@ -76,21 +62,12 @@ public class URLShorteningServiceTest {
         verify(linkRepository).insert(any(Link.class));
     }
 
-    private Link getLink(){
+    private Link getLink() {
         Link link = Link.builder().id(1000000000L).longUrl("https://www.baeldung.com/java-merge-sort").build();
         return link;
-
     }
 
-    private ShortenURLRequest getShortenURLRequest(){
+    private ShortenURLRequest getShortenURLRequest() {
         return ShortenURLRequest.builder().longUrl("https://www.baeldung.com/java-merge-sort").build();
-
     }
-
-    private List<Link> getAllLinks(){
-        List<Link> listOfAllLinks = new ArrayList<>();
-        listOfAllLinks.add(getLink());
-        return listOfAllLinks;
-    }
-
 }

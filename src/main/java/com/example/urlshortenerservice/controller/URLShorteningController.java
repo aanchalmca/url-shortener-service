@@ -2,7 +2,6 @@ package com.example.urlshortenerservice.controller;
 
 import com.example.urlshortenerservice.dto.ShortenURLRequest;
 import com.example.urlshortenerservice.dto.ShortenURLResponse;
-import com.example.urlshortenerservice.model.Link;
 import com.example.urlshortenerservice.service.DuplicateLongUrlException;
 import com.example.urlshortenerservice.service.InvalidLongUrlException;
 import com.example.urlshortenerservice.service.URLShorteningService;
@@ -14,8 +13,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 @Slf4j
 @RestController
@@ -37,16 +34,10 @@ public class URLShorteningController
      */
    @PostMapping(value="/create")
    @Operation(summary = "${usu.create.shortenurl}")
-    public ResponseEntity<ShortenURLResponse> shortenURL(@Valid @RequestBody ShortenURLRequest shortenURLRequest){
+    public ResponseEntity<ShortenURLResponse> shortenURL(@Valid @RequestBody ShortenURLRequest shortenURLRequest) {
        return new ResponseEntity<>(urlShorteningService.shortenUrl(shortenURLRequest),
                HttpStatus.OK);
     }
-
-    @GetMapping(value="/findAllUrls")
-    public List<Link> getAllURls(){
-       return urlShorteningService.getAllUrls();
-    }
-
     @ResponseStatus(value=HttpStatus.BAD_REQUEST, reason="Input Long URL is incorrect")
     @ExceptionHandler(InvalidLongUrlException.class)
     public void invalidLongUrl() {

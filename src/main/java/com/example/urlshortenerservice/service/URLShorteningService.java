@@ -13,7 +13,6 @@ import org.springframework.stereotype.Service;
 
 import java.time.ZoneOffset;
 import java.time.ZonedDateTime;
-import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -60,9 +59,8 @@ public class URLShorteningService {
 
         return shortenURLResponse;
     }
-
     //Fetch long url
-    public String getLongURL(String shortUrl){
+    public String getLongURL(String shortUrl) {
 
         Long id = base62Encoder.decode(shortUrl);
         Optional<Link> link = linkRepository.findById(id);
@@ -70,18 +68,12 @@ public class URLShorteningService {
         return link.get().getLongUrl();
     }
 
-    public List<Link> getAllUrls (){
-        return linkRepository.findAll();
-
-    }
-
     // Validate the long url
-    public boolean validateIncomingLongURL(String longUrl){
+    public boolean validateIncomingLongURL(String longUrl) {
         final UrlValidator urlValidator =  new UrlValidator( new String[] { "http", "https" }, UrlValidator.ALLOW_ALL_SCHEMES );
         if (!urlValidator.isValid(longUrl)){
             throw new InvalidLongUrlException("Invalid long URL");
         }
         return true;
     }
-
 }
